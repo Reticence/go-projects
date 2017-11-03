@@ -31,7 +31,7 @@ func uiStructure() {
 	window.Show()
 }
 
-func RunWinGui()  {
+func RunWinGui() {
 	err := ui.Main(uiStructure)
 	if err != nil {
 		panic(err)

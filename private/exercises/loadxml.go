@@ -7,8 +7,8 @@
 package exercises
 
 import (
-	//"encoding/xml"
-	//"github.com/tealeg/xlsx"
+	"encoding/xml"
+	"github.com/tealeg/xlsx"
 	"fmt"
 	"io/ioutil"
 	"strings"
@@ -106,19 +106,19 @@ func RunLoadxml() {
 	for i, file := range fileList {
 		filePath := dirName + file.Name()
 		if strings.Contains(filePath, ".xml") {
-			//content, _ := ioutil.ReadFile(filePath)
-			//var result Result
-			//xml.Unmarshal(content, &result)
-			//
-			//for _, value := range result.Jbxx {
-			//	fmt.Println(value)
-			//}
-			//
-			//for _, value := range result.Data.Ksmc {
-			//	fmt.Println(value)
-			//}
-			//
-			//fmt.Println(result.Zj)
+			content, _ := ioutil.ReadFile(filePath)
+			var result Result
+			xml.Unmarshal(content, &result)
+
+			for _, value := range result.Jbxx {
+				fmt.Println(value)
+			}
+
+			for _, value := range result.Data.Ksmc {
+				fmt.Println(value)
+			}
+
+			fmt.Println(result.Zj)
 		}
 		percent := 100 * i / fileListLen
 		if percent%10 == 0 && percent > percentTmp {
@@ -127,18 +127,18 @@ func RunLoadxml() {
 		}
 	}
 
-	//file := xlsx.NewFile()
-	//sheet, _ := file.AddSheet("Sheet1")
-	//row := sheet.AddRow()
-	//cell := row.AddCell()
-	//cell.Value = "haha"
-	//cell = row.AddCell()
-	//cell.Value = "xixi"
-	//
-	//err := file.Save("T:/file.xlsx")
-	//if err != nil {
-	//	panic(err)
-	//}
+	file := xlsx.NewFile()
+	sheet, _ := file.AddSheet("Sheet1")
+	row := sheet.AddRow()
+	cell := row.AddCell()
+	cell.Value = "haha"
+	cell = row.AddCell()
+	cell.Value = "xixi"
+
+	err := file.Save("T:/file.xlsx")
+	if err != nil {
+		panic(err)
+	}
 	titleMap["a"] = "a"
 	titleMap["b"] = "b"
 	fmt.Println(getDatetime())

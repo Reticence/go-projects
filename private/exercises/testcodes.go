@@ -35,15 +35,13 @@ func (i *Infos) setValue2(iid int, iname string) (id int, name string) {
 
 type Hello struct{}
 
-func (h Hello) ServeHTTP(
-	w http.ResponseWriter,
-	r *http.Request) {
+func (h Hello) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Hello!")
 }
 
-func mainHTTP() {
+func MainHTTP(uri string) {
 	var h Hello
-	err := http.ListenAndServe("localhost:4000", h)
+	err := http.ListenAndServe(uri, h)
 	if err != nil {
 		log.Fatal(err)
 	}
