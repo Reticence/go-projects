@@ -1,7 +1,7 @@
 // @Author  : Reticence (liuyang_blue@qq.com)
 // @Homepage: https://github.com/Reticence
 // @Date    : 2017-11-01 16:04
-// @Version : 1.0
+// @Version : 0.1
 // @Software: Gogland
 
 package main
@@ -15,7 +15,6 @@ import (
 	"fmt"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/tealeg/xlsx"
-	"html/template"
 	"io"
 	"io/ioutil"
 	"net/http"
@@ -235,12 +234,25 @@ func sortBySize(fInfos []os.FileInfo) []os.FileInfo {
 
 func handler(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println("Have request..")
-	//fmt.Fprintf(w, "Hello %q", html.EscapeString(r.URL.Path))
+	//fmt.Fprintf(w, "Hello %q", html.EscapeString(r.URL.filePath))
 	//file, _ := os.OpenFile("T:/test.html", os.O_RDONLY, 0644)
 	//fb, _ := ioutil.ReadAll(file)
 	//w.Write(fb)
-	t, _ := template.ParseFiles("T:/test.html")
-	t.Execute(w, nil)
+
+	//t, _ := template.ParseFiles("T:/test.html")
+	//t.Execute(w, nil)
+
+	r.ParseForm()       //解析参数，默认是不会解析的
+	fmt.Println(r.Form) //这些信息是输出到服务器端的打印信息
+	fmt.Println("path:", r.URL.Path)
+	fmt.Println("scheme:", r.URL.Scheme)
+	fmt.Println(r.Form["url_long"])
+	for k, v := range r.Form {
+		fmt.Println("key:", k)
+		fmt.Println("val:", strings.Join(v, ""))
+	}
+	fmt.Println()
+	fmt.Fprint(w, "Hello astaxie!") //这个写入到w的是输出到客户端的
 }
 
 func main() {
@@ -250,8 +262,8 @@ func main() {
 	//cc := &codeContent{make(map[string]string), make(map[string]interface{})}
 	//cc.loadCodeContent(false, "T:/")
 	//for _, fi := range files {
-	//	fmt.Println(fi.Size(), fi.Name())
-	//	cc.fileProcessing("1/1", baseDir+fi.Name())
+	//	fmt.Println(fi.size(), fi.name())
+	//	cc.fileProcessing("1/1", baseDir+fi.name())
 	//}
 	addr := ":8008"
 	http.HandleFunc("/", handler)

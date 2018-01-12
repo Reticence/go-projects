@@ -11,8 +11,6 @@ import (
 	"compress/gzip"
 	"fmt"
 	"io"
-	"log"
-	"net/http"
 	"os"
 )
 
@@ -31,20 +29,6 @@ func (i *Infos) setValue2(iid int, iname string) (id int, name string) {
 	i.Id = iid
 	i.Name = iname
 	return i.Id, i.Name
-}
-
-type Hello struct{}
-
-func (h Hello) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Hello!")
-}
-
-func MainHTTP(uri string) {
-	var h Hello
-	err := http.ListenAndServe(uri, h)
-	if err != nil {
-		log.Fatal(err)
-	}
 }
 
 func readGzFile(ipath string) {

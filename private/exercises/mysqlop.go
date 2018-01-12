@@ -12,11 +12,11 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
-var db *sql.DB
+var mysql *sql.DB
 
 func RunMysqlOp() {
-	db, _ = sql.Open("mysql", "root:123456@tcp(10.1.1.102:3306)/?charset=utf8")
-	rows, _ := db.Query("SELECT user_age, user_sex FROM test.gouser")
+	mysql, _ = sql.Open("mysql", "root:123456@tcp(10.1.1.102:3306)/?charset=utf8")
+	rows, _ := mysql.Query("SELECT user_age, user_sex FROM test.gouser")
 	var userAge, userSex int32
 	for rows.Next() {
 		rows.Scan(&userAge, &userSex)
@@ -29,7 +29,7 @@ func RunMysqlOp() {
 
 //插入demo
 func insert() {
-	stmt, err := db.Prepare("INSERT test.gouser (user_name,user_age,user_sex) values (?,?,?)")
+	stmt, err := mysql.Prepare("INSERT test.gouser (user_name,user_age,user_sex) values (?,?,?)")
 	checkErr(err)
 	res, err := stmt.Exec("tony", 20, 1)
 	checkErr(err)
@@ -40,7 +40,7 @@ func insert() {
 
 //查询demo
 func query() {
-	rows, err := db.Query("SELECT * FROM test.gouser")
+	rows, err := mysql.Query("SELECT * FROM test.gouser")
 	checkErr(err)
 
 	//普通demo
@@ -84,7 +84,7 @@ func query() {
 
 //更新数据
 func update() {
-	stmt, err := db.Prepare(`UPDATE test.gouser SET user_age=?,user_sex=? WHERE user_id=?`)
+	stmt, err := mysql.Prepare(`UPDATE test.gouser SET user_age=?,user_sex=? WHERE user_id=?`)
 	checkErr(err)
 	res, err := stmt.Exec(21, 2, 1)
 	checkErr(err)
@@ -95,7 +95,7 @@ func update() {
 
 //删除数据
 func remove() {
-	stmt, err := db.Prepare(`DELETE FROM test.gouser WHERE user_id=?`)
+	stmt, err := mysql.Prepare(`DELETE FROM test.gouser WHERE user_id=?`)
 	checkErr(err)
 	res, err := stmt.Exec(1)
 	checkErr(err)
