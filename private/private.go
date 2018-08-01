@@ -17,9 +17,9 @@ func main() {
 	//exercises.RunParselog()
 	//exercises.RunTestcodes()
 	//exercises.RunWinGui()
-	//exercises.RunHTTP()
+	exercises.RunHTTP()
 	//exercises.RunMysqlOp()
-	exercises.RunMssqlOp()
+	//exercises.RunMssqlOp()
 	//exercises.RunDocx()
 	//exercises.RunJson()
 
