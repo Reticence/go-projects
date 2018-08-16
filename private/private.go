@@ -6,9 +6,7 @@
 
 package main
 
-import (
-	"github.com/Reticence/go-projects/private/exercises"
-)
+import "go-projects/private/exercises"
 
 func main() {
 	//studys.RunParacalc()
@@ -16,7 +14,6 @@ func main() {
 	//exercises.RunLoadxml()
 	//exercises.RunParselog()
 	//exercises.RunTestcodes()
-	//exercises.RunWinGui()
 	exercises.RunHTTP()
 	//exercises.RunMysqlOp()
 	//exercises.RunMssqlOp()

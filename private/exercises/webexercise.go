@@ -22,6 +22,7 @@ import (
 
 func RunHTTP() {
 	addr := "localhost:8008"
+	fmt.Printf("Server url: http://%s/\n", addr)
 	//http.ListenAndServe(addr, Hello{})
 
 	http.HandleFunc("/", sayhelloName)

@@ -1,4 +1,9 @@
-﻿# Binaries for programs and plugins
+﻿# user setting
+.idea/
+vendor/
+Gopkg.lock
+
+# Binaries for programs and plugins
 *.exe
 *.dll
 *.so

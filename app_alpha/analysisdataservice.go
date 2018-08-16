@@ -6,7 +6,7 @@
 
 package main
 
-import adu "github.com/Reticence/go-projects/app_alpha/analysisdatautils"
+import adu "go-projects/app_alpha/analysisdatautils"
 
 func main() {
 	adu.InitializationAll()
